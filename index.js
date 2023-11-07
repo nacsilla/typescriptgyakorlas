@@ -46,8 +46,99 @@ function TrKeszito(f, bemenet, kimenet) {
     tr.appendChild(td3);
     (_a = document.getElementById("torzs")) === null || _a === void 0 ? void 0 : _a.appendChild(tr);
 }
+/*
+2023.11.02.
+feladat1 (git)
+
+Készíts publikus GitHub repositorit a saját felhasználói fiókodban
+Inditsd Git Bash-t, és a jelenlegi TS projectedben inicializálj git-et
+A lokális repo-t kösd össze az online (github-os) repoddal
+Töltsd fel a jelenlegi állapotot a github-ra
+
+feladat2 (ts)
+
+Készíts alprogramot, ami kiválasztja egy auto tömbből a legkisebb hengerűrtartalmú autót
+Készíts alprogramot, ami megadja a paraméterül kapott tömbből a benzinesek darabszámáz
+A változtatásokat töltsd fel a github repodba
+*/
+var autok = [];
+var a1 = { gyarto: "Opel", tipus: "Astra", hengerurtartalom: 1600, benzinesE: true };
+var a2 = { gyarto: "Ford", tipus: "Cmax", hengerurtartalom: 2000, benzinesE: false };
+var a3 = { gyarto: "Suzuki", tipus: "Vitara", hengerurtartalom: 1400, benzinesE: true };
+autok.push(a1);
+autok.push(a2);
+autok.push(a3);
+function LegkisebbHengerurtartalom(autok) {
+    var minHenegerur = autok[0];
+    for (var i = 1; i < autok.length; i++) {
+        if (autok[i].hengerurtartalom < minHenegerur.hengerurtartalom) {
+            minHenegerur = autok[i];
+            autok.push(minHenegerur);
+        }
+    }
+    return minHenegerur[i];
+}
+console.log(LegkisebbHengerurtartalom);
+function BenzinesE(autok) {
+    var db = 0;
+    for (var i = 0; i < autok.length; i++) {
+        if (autok[i].benzinesE) {
+            db++;
+        }
+    }
+    return db;
+}
+console.log(BenzinesE);
+/*
+2023.11.07
+Feladat 3.
+
+Készíts alprogramot, ami...
+    -Egy auto tömbből megadja az átlag hengerűrtartalmat
+    -Eldönti, hogy van-e nem benzines auto az autok tömbben
+    -Szétválogatja a benzines és nem benzines autokat
+
+A változatot tölsd fel a github repoba
+
+*/
+var hengerek = [1600, 2000, 1400];
+function Atlag(hengerek) {
+    var atlag = 0;
+    for (var i = 0; i < hengerek.length; i++) {
+        atlag += hengerek[i];
+    }
+    atlag /= hengerek.length;
+    return atlag;
+}
+function Benzines(autok) {
+    var benzines = [];
+    var egyeb = [];
+    for (var i = 0; i < autok.length; i++) {
+        if (autok[i] == true) {
+            benzines.push(autok[i]);
+        }
+        else {
+            egyeb.push(autok[i]);
+        }
+    }
+    return [benzines, egyeb];
+}
+function VanBenzines(autok) {
+    var benzindb;
+    for (var i = 0; i < autok.length; i++) {
+        if (autok[i] == true) {
+            benzindb++;
+        }
+    }
+    return benzindb;
+}
 function Futtatas() {
     TrKeszito("Van-e negativ", [12, 23, 5, 0, -1, 17], VanENegativ([12, 23, 5, 0, -1, 17]));
     TrKeszito("Kor kerulet-terulet", 3, KorKerTer(3));
+    TrKeszito("Benzines-e?", autok, BenzinesE(autok));
+    TrKeszito("MinHengerur", autok, LegkisebbHengerurtartalom(autok));
+    TrKeszito("Atlag", hengerek, Atlag(hengerek));
+    TrKeszito("Benzinesdb", autok, Benzines(autok));
+    TrKeszito("VanBenzines?", autok, VanBenzines(autok));
 }
 Futtatas();
